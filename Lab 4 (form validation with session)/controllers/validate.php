@@ -97,12 +97,14 @@ function validatePhoneNumber($phoneNumber) {
     if (empty($phoneNumber)) {
         $isValid = 0;
         return "Phone number is empty";
-    } elseif (!preg_match("/^[0-9]{11}$/", $phoneNumber)) {
-        $isValid = 0;
-        return "Invalid phone number format";
+    } 
+    if (!preg_match('/^\+880[1-9]\d{9}$/', $phoneNumber)) {
+        $isValid = false;
+        return "Invalid phone number format. Please enter a valid number with country code +880.";
     }
     return "";
 }
+
 
 function validateWebsite($website) {
     global $isValid;

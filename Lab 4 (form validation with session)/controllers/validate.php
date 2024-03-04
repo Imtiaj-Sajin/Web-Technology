@@ -151,6 +151,13 @@ function validatePassword($password) {
         $isValid = 0;
         return "Password is empty";
     }
+
+    $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/'; 
+    if (!preg_match($pattern, $password)) { 
+        $isValid = 0;
+        return "Password must contain at least one uppercase letter, one lowercase letter, one number,one special character, and be at least 8 characters long.";
+ 
+}
     return "";
 }
 

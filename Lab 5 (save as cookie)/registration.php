@@ -7,14 +7,29 @@ function setFormCookies() {
         if (isset($_POST[$field])) {
             $value = $_POST[$field];
             setcookie($field, $value, time() + (86400 * 30), "/"); 
+            
+
         }
     }
+    $currentDateTime = date("Y-m-d H:i:s");
+
+    setcookie('last_modified', $currentDateTime, time() + (86400 * 30), "/"); 
+
 }
 
 
 function getCookieValue($name) {
     return isset($_COOKIE[$name]) ? $_COOKIE[$name] : '';
+
 }
+function getLastModifiedTime() {
+    if (isset($_COOKIE['last_modified'])) {
+        return $_COOKIE['last_modified'];
+    }
+    return null;
+}
+
+
 ?>
 
 
@@ -216,7 +231,7 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
                     <tr>
                         <td>Username</td>
                         <td>:</td>
-                        <td><input type="text" id="uname" name="uname" value="<?php echo getCookieValue('uname'); ?>">>
+                        <td><input type="text" id="uname" name="uname" value="<?php echo getCookieValue('uname'); ?>">
                         <?php echo $unameErr; ?></td>
                     </tr>
                     <tr>
@@ -242,6 +257,7 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
     </tr>
 </table>
 </form>
+<p>Last modified: <?php echo getCookieValue('last_modified'); ?></p>
 
 </body>
 </html>

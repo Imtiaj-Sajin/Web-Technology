@@ -2,12 +2,31 @@
 $servername = "localhost";
 $dbusername = "root";
 $dbpassword = "";
-$dbname = "test";
+$dbname = "webtech";
 
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
+}
+
+function credentials($username, $password) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("SELECT user_id FROM users WHERE user_name = ? AND user_pass = ?");
+        if (!$stmt) {
+            throw new Exception($conn->error);
+        }
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        $stmt->store_result();
+        $num_rows = $stmt->num_rows;
+        $stmt->close();
+        return ($num_rows == 1); 
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>";
+        return false; 
+    }
 }
 
 function insertRecord($username, $user_pass) {

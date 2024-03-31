@@ -10,6 +10,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (credentials($username, $password)) {
         $_SESSION['hasLoggedIn']=true;
+        
+        $userData=getValByUserName($username);
+        $_SESSION['username']=$userData['user_name'];
+        $_SESSION['userid']=$userData['user_id'];
+        $_SESSION['userpass']=$userData['user_pass'];
+        $_SESSION['bio']=$userData['bio'];
+        $_SESSION['email']=$userData['email'];
+        $_SESSION['email']=$userData['website'];
+
         header("Location: dashboard.php");
         exit();
     } 

@@ -15,21 +15,37 @@ if(!isset($_SESSION['hasLoggedIn'])){
     <title>Dashboard | Courseway</title>
 </head>
 <body>
-    <table width="100%" cellspacing="0" cellpadding="0" border="1">
+    <fieldset>
+    <table width="100%" border="0">
         <tr>
-            <td align="left" style="padding: 10px;">
-                <img src="path_to_your_logo" alt="Courseway Logo">
+            <td align="left">
+                <img width="150px" src="../public/imgs/Creative.png" alt="Courseway Logo">
             </td>
-            <td align="right" style="padding: 10px;">
+            <td align="right">
                 Hello, <?php echo $_SESSION['username']; ?>!
             </td>
         </tr>
     </table>
-
+    </fieldset>
+    <br>
     <fieldset>
-        <legend>Welcome to Courseway Dashboard</legend>
-        <p>Hello, !</p>
-        <!-- Add your dashboard content here -->
+        <table > 
+            <tr>
+                <td width="150px" valign="top">
+                
+                    <ul>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">Communication</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="../controllers/logout.php">Logout</a></li>
+                    </ul>
+                </td>
+                <td>
+                <p>asdfasdffadsf</p>
+                </td>
+            </tr>
+        </table>
+        
     </fieldset>
 
     <footer>

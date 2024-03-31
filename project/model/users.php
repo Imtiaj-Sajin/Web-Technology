@@ -116,10 +116,10 @@ function getAll() {
     }
 }
 
-function getVal($user_id) {
+function getValById($user_id) {
     global $conn;
     try {
-        $stmt = $conn->prepare("SELECT user_name, user_pass FROM users WHERE user_id = ?");
+        $stmt = $conn->prepare("SELECT user_id, user_name, user_pass, email, bio, website FROM users WHERE user_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
@@ -129,7 +129,14 @@ function getVal($user_id) {
 
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
-            return array("user_name" => $row['user_name'], "user_pass" => $row['user_pass']);
+            return array(
+                "user_id" => $row['user_id'],
+                "user_name" => $row['user_name'],
+                "user_pass" => $row['user_pass'],
+                "email" => $row['email'],
+                "bio" => $row['bio'],
+                "website" => $row['website']
+            );
         } else {
             return null; 
         }
@@ -137,4 +144,35 @@ function getVal($user_id) {
         echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
     }
 }
+
+function getValByUserName($user_name) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("SELECT user_id, user_name, user_pass, email, bio, website FROM users WHERE user_name = ?");
+        if (!$stmt) {
+            throw new Exception($conn->error); 
+        }
+        $stmt->bind_param("s", $user_name);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            return array(
+                "user_id" => $row['user_id'],
+                "user_name" => $row['user_name'],
+                "user_pass" => $row['user_pass'],
+                "email" => $row['email'],
+                "bio" => $row['bio'],
+                "website" => $row['website']
+            );
+        } else {
+            return null; 
+        }
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
+    }
+}
+
+
 ?>

@@ -3,7 +3,7 @@ include '../model/users.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['user_id'])) {
     $userId = $_POST['user_id'];
-    $userData = getVal($userId);
+    $userData = getValById($userId);
     echo "<h2>Old Profile</h2>";
     if ($userData) {
         echo "User Name: " . $userData['user_name'] . "<br>";
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['update_username'])) {
     updateName($userId, $newUsername);
 
     $userId = $_POST['user_id'];
-    $userData = getVal($userId);
+    $userData = getValById($userId);
     
     echo "<h2>New Profile</h2>";
 
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['update_password'])) {
     $newPassword = $_POST['new_password'];
     
         updatePass($userId, $newPassword);$userId = $_POST['user_id'];
-    $userData = getVal($userId);
+    $userData = getValById($userId);
 
     echo "<h2>New Profile</h2>";
 

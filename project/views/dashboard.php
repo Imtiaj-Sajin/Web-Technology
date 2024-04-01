@@ -16,7 +16,7 @@ if(!isset($_SESSION['hasLoggedIn'])){
 </head>
 <body>
     <fieldset>
-    <table width="100%" border="0">
+    <table width="100%">
         <tr>
             <td align="left">
                 <img width="150px" src="../public/imgs/Creative.png" alt="Courseway Logo">
@@ -28,28 +28,32 @@ if(!isset($_SESSION['hasLoggedIn'])){
     </table>
     </fieldset>
     <br>
-    <fieldset>
-        <table > 
+    
+        <table width="100%"> 
             <tr>
-                <td width="150px" valign="top">
+                <td width="150px">
                 
                     <ul>
                         <li><a href="#">Courses</a></li>
                         <li><a href="#">Communication</a></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="profile.php">Profile</a></li>
                         <li><a href="../controllers/logout.php">Logout</a></li>
                     </ul>
                 </td>
-                <td>
-                <p>asdfasdffadsf</p>
+                <td align="center">
+                 asdfasdffadsf
                 </td>
             </tr>
         </table>
-        
-    </fieldset>
+    <?php
+    function  footer_show() {
+        echo '<footer style="background-color: #3c424b; height: 100px;">
+        bye bye asdjfkhasdfjkh
+    </footer';
+    }
 
-    <footer>
-        <!-- Add footer content here -->
-    </footer>
+    footer_show();
+        ?>
+    
 </body>
 </html>

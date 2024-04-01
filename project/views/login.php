@@ -10,8 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (credentials($username, $password)) {
         $_SESSION['hasLoggedIn']=true;
-        
+
         $userData=getValByUserName($username);
+        $_SESSION['$userData']= $userData;
         $_SESSION['username']=$userData['user_name'];
         $_SESSION['userid']=$userData['user_id'];
         $_SESSION['userpass']=$userData['user_pass'];

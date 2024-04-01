@@ -77,6 +77,54 @@ function updatePass($user_id, $new_pass) {
     }
 }
 
+function updateEmail($user_id, $new_email) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("UPDATE users SET email = ? WHERE user_id = ?");
+        if (!$stmt) {
+            throw new Exception($conn->error); 
+        }
+        $stmt->bind_param("si", $new_email, $user_id);
+        $stmt->execute();
+        echo "<p style='color: green;'>Email updated successfully</p><br>"; 
+        $stmt->close();
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
+    }
+}
+
+function updateBio($user_id, $new_bio) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("UPDATE users SET bio = ? WHERE user_id = ?");
+        if (!$stmt) {
+            throw new Exception($conn->error); 
+        }
+        $stmt->bind_param("si", $new_bio, $user_id);
+        $stmt->execute();
+        echo "<p style='color: green;'>Bio updated successfully</p><br>"; 
+        $stmt->close();
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
+    }
+}
+
+function updateWebsite($user_id, $new_website) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("UPDATE users SET website = ? WHERE user_id = ?");
+        if (!$stmt) {
+            throw new Exception($conn->error); 
+        }
+        $stmt->bind_param("si", $new_website, $user_id);
+        $stmt->execute();
+        echo "<p style='color: green;'>Website updated successfully</p><br>"; 
+        $stmt->close();
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
+    }
+}
+
 function deleteRecord($userId) {
     global $conn;
     try {
@@ -173,6 +221,5 @@ function getValByUserName($user_name) {
         echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
     }
 }
-
 
 ?>

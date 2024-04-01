@@ -29,14 +29,14 @@ function credentials($username, $password) {
     }
 }
 
-function insertRecord($username, $user_pass) {
+function insertRecord($username, $user_pass, $email, $website, $bio) {
     global $conn;
     try {
-        $stmt = $conn->prepare("INSERT INTO users (user_name, user_pass) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO users (user_name, user_pass, email, website, bio) VALUES (?, ?, ?, ?, ?)");
         if (!$stmt) {
             throw new Exception($conn->error);
         }
-        $stmt->bind_param("ss", $username, $user_pass);
+        $stmt->bind_param("sssss", $username, $user_pass, $email, $website, $bio);
         $stmt->execute();
         echo "<p style='color: green;'>New record created successfully</p><br>"; 
         $stmt->close();
@@ -44,6 +44,7 @@ function insertRecord($username, $user_pass) {
         echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
     }
 }
+
 
 function updateName($user_id, $username) {
     global $conn;

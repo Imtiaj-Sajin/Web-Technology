@@ -1,5 +1,4 @@
 <?php
-
 function footer_show() {
     echo '<footer style="background-color: #3c424b; height: 100px;">';
     echo 'bye bye asdjfkhasdfjkh';

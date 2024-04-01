@@ -37,6 +37,7 @@ if(!isset($_SESSION['hasLoggedIn'])){
                         <li><a href="#">Courses</a></li>
                         <li><a href="#">Communication</a></li>
                         <li><a href="profile.php">Profile</a></li>
+                        <li><a href="changePass.php">change Pass</a></li>
                         <li><a href="../controllers/logout.php">Logout</a></li>
                     </ul>
                 </td>

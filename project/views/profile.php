@@ -6,11 +6,10 @@ if(!isset($_SESSION['hasLoggedIn'])){
 }
 
 include '../model/users.php';
-include 'h&f.php';
+include 'parts.php';
 
 $userData = getValById($_SESSION['userid']);
 
-// Update user information if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['update_username'])) {
         $newUsername = $_POST['new_username'];
@@ -29,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         updateWebsite($_SESSION['userid'], $newWebsite);
     }
 
-    // Refresh user data after update
     $userData = getValById($_SESSION['userid']);
 }
 ?>
@@ -53,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <li><a href="#">Courses</a></li>
                         <li><a href="#">Communication</a></li>
                         <li><a href="profile.php">Profile</a></li>
+                        <li><a href="changePass.php">change Pass</a></li>
                         <li><a href="../controllers/logout.php">Logout</a></li>
                     </ul>
                 </td>
@@ -60,19 +59,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h2>User Profile</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <p>User ID: <?php echo $userData['user_id']; ?></p>
-                        <!-- Update Username -->
+
                         <label for="new_username">Username:</label>
                         <input type="text" id="new_username" name="new_username" value="<?php echo $userData['user_name']; ?>">
                         <button type="submit" name="update_username">Update</button><br>
-                        <!-- Update Email -->
+
                         <label for="new_email">Email:</label>
                         <input type="email" id="new_email" name="new_email" value="<?php echo $userData['email']; ?>">
                         <button type="submit" name="update_email">Update</button><br>
-                        <!-- Update Bio -->
+
                         <label for="new_bio">Bio:</label>
                         <textarea id="new_bio" name="new_bio"><?php echo $userData['bio']; ?></textarea>
                         <button type="submit" name="update_bio">Update</button><br>
-                        <!-- Update Website -->
+
                         <label for="new_website">Website:</label>
                         <input type="text" id="new_website" name="new_website" value="<?php echo $userData['website']; ?>">
                         <button type="submit" name="update_website">Update</button><br>

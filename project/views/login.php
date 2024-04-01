@@ -106,6 +106,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="password">Password:</label>
             <input type="password" id="password" name="password"><br><br>
             <input type="submit" value="Login">
+            <br>
+            <a href="forgot_pass.php">Forgot Password?</a> <!-- Added Forgot Password button -->
+
         </form>
         <?php if (isset($error_message)) echo "<p style='color: red;' class='error-message'>$error_message</p>"; ?>
     </div>

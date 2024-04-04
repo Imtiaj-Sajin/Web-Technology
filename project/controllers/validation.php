@@ -2,7 +2,6 @@
 
 <?php
 
-require "../model/users.php";
 $isValid = 1;
 
 function sanitize($data) {
@@ -10,58 +9,13 @@ function sanitize($data) {
     return $data;
 }
 
-function validateFirstName($firstName) {
-    global $isValid;
-    if (empty($firstName)) {
-        $isValid = 0;
-        return "First name is empty";
-    }
-    return "";
-}
-
-function validateLastName($lastName) {
-    global $isValid;
-    if (empty($lastName)) {
-        $isValid = 0;
-        return "Last name is empty";
-    }
-
-    return "";
-}
-
-function validateGender($gender) {
-   # global $isValid;
-    if (empty($gender)) {
-        #$isValid = 0;
-        return "Gender is required";
-    } else {
-        return '';
-    }
-
-}
 
 
 
 
-function validateBloodGroup($bloodGroup) {
-    global $isValid;
-    if (empty($bloodGroup)) {
-        $isValid = 0;
-        return "Blood group is empty";
-    }
 
-    return "";
-}
 
-function validateReligion($religion) {
-    global $isValid;
-    if (empty($religion)) {
-        $isValid = 0;
-        return "Religion is empty";
-    }
 
-    return "";
-}
 
 function validateEmail($email) {
     global $isValid;
@@ -77,18 +31,7 @@ function validateEmail($email) {
     return "";
 }
 
-function validatePhoneNumber($phoneNumber) {
-    global $isValid;
-    if (empty($phoneNumber)) {
-        $isValid = 0;
-        return "Phone number is empty";
-    } 
-    if (!preg_match('/^\+880[1-9]\d{9}$/', $phoneNumber)) {
-        $isValid = false;
-        return "Invalid phone number format. Please enter a valid number with country code +880.";
-    }
-    return "";
-}
+
 
 
 function validateWebsite($website) {
@@ -146,8 +89,8 @@ function success(){
     global $isValid;
 
     if ($isValid) {
-        insertRecord($uname, $pass, $email, $website, $bio);
-        header("Location: ../views/dashboard.php");
+        insertRecord($_POST['uname'], $_POST['pass'], $_POST['email'], $_POST['website'], $_POST['bio']);
+        //header("Location: ../views/dashboard.php");
 
     }
 }

@@ -1,8 +1,8 @@
 <?php
 session_start();
-
+require "../model/users.php";
 function setFormCookies() {
-    $inputFields = array('firstname', 'lastname', 'bio', 'bloodgroup', 'religion', 'email', 'phonenum', 'website', 'uname', 'pass', 'conpass', 'gender');
+    $inputFields = array( 'bio','email', 'website', 'uname', 'pass', 'conpass');
     foreach ($inputFields as $field) {
         if (isset($_POST[$field])) {
             $value = $_POST[$field];
@@ -40,7 +40,7 @@ function getLastModifiedTime() {
 
 include '../controllers/validation.php';
 
-$firstNameErr=$lastNameErr=$genderErr=$bioErr=$bloodGroupErr=$religionErr=$emailErr=$phoneNumErr=$websiteErr=$addressBoxErr=$postcodeErr='';
+$bioErr=$emailErr=$websiteErr='';
 $unameErr=$conPassErr=$passErr='';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['save_with_cookies'])) {
@@ -49,118 +49,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['save_with_cookies']))
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['registerbtn'])) {
 
-$firstname = validateFirstName(sanitize ($_POST['firstname']));
-$lastname = validateLastName(sanitize ($_POST['lastname']));
 $bio = sanitize ($_POST['bio']);
-$bloodgroup = validateBloodGroup(sanitize ($_POST['bloodgroup']));
-$religion = validateReligion(sanitize ($_POST['religion']));
 $email = validateEmail(sanitize ($_POST['email']));
-$phonenum = validatePhoneNumber(sanitize ($_POST['phonenum']));
 $website = validateWebsite(sanitize ($_POST['website']));
 $uname = validateUsername(sanitize ($_POST['uname']));
 $pass = validatePassword(sanitize ($_POST['pass']));
 $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['conpass']));
 
-    $firstNameErr = $firstname;
-    $lastNameErr = $lastname;
-    $bioErr = $bio;
-    $bloodGroupErr = $bloodgroup;
-    $religionErr = $religion;
+    
     $emailErr = $email;
-    $phoneNumErr = $phonenum;
     $websiteErr = $website;
     $unameErr = $uname;
     $passErr = $pass;
     $conPassErr = $conPass;
 
-    if (isset($_POST['gender'])) {
-        $genderErr = validateGender($_POST['gender']);
+    
+
+    
+
+    if (empty($emailErr) && empty($unameErr)) {
+        $existingUser = getValByUserName($_POST['uname']);
+        $existingEmail = getValByEmail($_POST['email']);
+
+        if ($existingUser) {
+            $registrationError = "Username already exists";
+        } elseif ($existingEmail) {
+            $registrationError = "Email already exists";
+        } else {
+            success();
+        }
     } else {
-        $genderErr = "Gender is required";
-    }
-
-    
-
-    success();
-    
+        $registrationError = "Please fix the errors in the form";
+    }    
     
 }
 ?> 
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
+
+<?php if (!empty($registrationError)) { ?>
+    <p style="color: red;"><?php echo $registrationError; ?></p>
+<?php } ?>
+
 <table>
     <tr>
         <td>
             <fieldset>
-                <legend>General Information:</legend>
-                <table>
-                    <tr>
-                        <td>First name</td>
-                        <td>:</td>
-                        <td><input type="text" id="firstname" name="firstname" value="<?php echo getCookieValue('firstname'); ?>">
-                        <?php echo $firstNameErr; ?>
-                    </td>
-                        
-                    </tr>
-                    <tr>
-                        <td>Last name</td>
-                        <td>:</td>
-                        <td><input type="text" id="lastname" name="lastname" value="<?php echo getCookieValue('lastname'); ?>">
-                        <?php echo $lastNameErr; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Gender</td>
-                        <td>:</td>
-                        <td><input type="radio" id="male" name="gender" value="male"<?php echo (getCookieValue('gender') === 'male') ? ' checked' : ''; ?>>
-                            <label for="male">Male</label>
-                            <input type="radio" id="female" name="gender" value="female"<?php echo (getCookieValue('gender') === 'female') ? ' checked' : ''; ?>>
-                            <label for="female">Female</label>
-                            <?php echo '<br>'.$genderErr; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Bio</td>
-                        <td>:</td>
-                        <td><input type="textarea" id="bio" name="bio" value="<?php echo getCookieValue('bio'); ?>">
-                        <?php echo $bioErr; ?>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>Blood Group</td>
-                        <td>:</td>
-                        <td>
-                            <select id="bloodgroup" name="bloodgroup">
-                                <option value="b+"<?php echo (getCookieValue('bloodgroup')==='b+')? 'selected': ''?>>B+</option>
-                                <option value="b-"<?php echo (getCookieValue('bloodgroup')==='b-')? 'selected': ''?>>B-</option>
-                                <option value="o+"<?php echo (getCookieValue('bloodgroup')==='o+')? 'selected': ''?>>O+</option>
-                                <option value="o-"<?php echo (getCookieValue('bloodgroup')==='o-')? 'selected': ''?>>O-</option>
-                                <option value="a+"<?php echo (getCookieValue('bloodgroup')==='a+')? 'selected': ''?>>A+</option>
-                                <option value="ab+"<?php echo (getCookieValue('bloodgroup')==='ab+')? 'selected': ''?>>AB+</option>
-                            </select>
-                            <?php echo $bloodGroupErr; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Religion</td>
-                        <td>:</td>
-                        <td>
-                            <select id="religion" name="religion">
-                                <option value="islam"<?php echo (getCookieValue('religion')==='islam')? 'selected': ''?>>Islam</option>
-                                <option value="hindu"<?php echo (getCookieValue('religion')==='hindu')? 'selected': ''?>>Hindu</option>
-                                <option value="christianity"<?php echo (getCookieValue('religion')==='christianity')? 'selected': ''?>>Christianity</option>
-                            </select>
-                            <?php echo $religionErr; ?>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </td>
-
-        <td>
-            <fieldset>
-                <legend>Contact Information:</legend>
+                <legend>User Information:</legend>
                 <table>
                     <tr>
                         <td>Email</td>
@@ -170,10 +105,10 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
                         </td>
                     </tr>
                     <tr>
-                        <td>Phone/Mobile</td>
+                        <td>Bio</td>
                         <td>:</td>
-                        <td><input type="tel" id="phonenum" name="phonenum" value="<?php echo getCookieValue('phonenum'); ?>">
-                        <?php echo $phoneNumErr; ?></td>
+                        <td><textarea id="bio" name="bio"><?php echo getCookieValue('bio'); ?></textarea>
+                        </td>
                     </tr>
                     <tr>
                         <td>Website</td>
@@ -217,7 +152,11 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
 
     </tr>
 </table>
+
+
 </form>
+<br>
+<a href="login.php" >Login</a>
 <p>Last modified: <?php echo getCookieValue('last_modified'); ?></p>
 
 </body>

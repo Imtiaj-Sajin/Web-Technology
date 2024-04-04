@@ -223,4 +223,32 @@ function getValByUserName($user_name) {
     }
 }
 
+function getValByEmail($email) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("SELECT user_id, user_name, user_pass, email, bio, website  FROM users WHERE email = ?");
+        if (!$stmt) {
+            throw new Exception($conn->error); 
+        }
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            return array(
+                "user_id" => $row['user_id'],
+                "user_name" => $row['user_name'],
+                "user_pass" => $row['user_pass'],
+                "email" => $row['email'],
+                "bio" => $row['bio'],
+                "website" => $row['website']
+            );
+        } else {
+            return null; 
+        }
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
+        return null;
+    }
+}
 ?>

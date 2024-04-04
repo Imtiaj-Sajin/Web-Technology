@@ -109,6 +109,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br>
             <a href="forgot_pass.php">Forgot Password?</a> <!-- Added Forgot Password button -->
 
+            <br>
+            <a href="signup.php">Sign Up</a> <!-- Added Forgot Password button -->
+
         </form>
         <?php if (isset($error_message)) echo "<p style='color: red;' class='error-message'>$error_message</p>"; ?>
     </div>

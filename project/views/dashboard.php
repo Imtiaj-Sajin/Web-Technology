@@ -1,5 +1,7 @@
 <?php
 session_start();
+require "parts.php";
+
 if(!isset($_SESSION['hasLoggedIn'])){
     header("Location: login.php");
     exit();
@@ -15,18 +17,8 @@ if(!isset($_SESSION['hasLoggedIn'])){
     <title>Dashboard | Courseway</title>
 </head>
 <body>
-    <fieldset>
-    <table width="100%">
-        <tr>
-            <td align="left">
-                <img width="150px" src="../public/imgs/Creative.png" alt="Courseway Logo">
-            </td>
-            <td align="right">
-                Hello, <?php echo $_SESSION['username']; ?>!
-            </td>
-        </tr>
-    </table>
-    </fieldset>
+    
+    <?php header_show(); ?>
     <br>
     
         <table width="100%"> 
@@ -47,11 +39,7 @@ if(!isset($_SESSION['hasLoggedIn'])){
             </tr>
         </table>
     <?php
-    function  footer_show() {
-        echo '<footer style="background-color: #3c424b; height: 100px;">
-        bye bye asdjfkhasdfjkh
-    </footer';
-    }
+ 
 
     footer_show();
         ?>

@@ -5,18 +5,20 @@ function footer_show() {
     echo '</footer>';
 }
 
+
 function header_show(){
-    echo '<fieldset>
+    echo '<fieldset style="margin: 2px;border-radius: 10px;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
         <table width="100%">
             <tr>
                 <td align="left">
                     <img width="150px" src="../public/imgs/Creative.png" alt="Courseway Logo">
                 </td>
                 <td align="right">
-                    Hello, <?php echo $_SESSION["username"]; ?>!
+                    Hello, ' . $_SESSION["username"] . '!
                 </td>
             </tr>
         </table>
     </fieldset>';
 }
 ?>
+

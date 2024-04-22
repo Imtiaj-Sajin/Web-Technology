@@ -33,9 +33,24 @@ function getLastModifiedTime() {
 
 <!DOCTYPE html>
 <html>
-<body>
+<body >
+<fieldset style="margin: 5px;border-radius: 10px;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
+        <table width="100%">
+            <tr>
+                <td align="left">
+                    <img width="150px" src="../public/imgs/Creative.png" alt="Courseway Logo">
+                </td>
+                <td align="right">
+                    Welcome to Courseway!
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    
+<div class="signup-container">
+<h2>Registration</h2>
+<link rel="stylesheet" href="style.css">
 
-<h1>Registration</h1>
 <?php
 
 include '../controllers/validation.php';
@@ -91,6 +106,7 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
     <p style="color: red;"><?php echo $registrationError; ?></p>
 <?php } ?>
 
+
 <table>
     <tr>
         <td>
@@ -120,6 +136,8 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
                 </table>
             </fieldset>
         </td>
+
+        
         <td>
             <fieldset>
                 <legend>Account Information:</legend>
@@ -140,23 +158,27 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
                         <td>Confirm Password</td>
                         <td>:</td>
                         <td><input  id="conpass" name="conpass">
-                        <?php echo $conPassErr; ?></td>
+                        <p class="error"><?php echo $conPassErr; ?></p>
                     </tr>
                 </table>
             </fieldset>
             <br>
-            <button type="submit" id="registerbtn" name="registerbtn">Register</button>
-            <button type="submit" name="save_with_cookies">Save Data as Draft</button>
+            
 
         </td>
-
+        
     </tr>
+    
 </table>
 
+<input type="submit" id="registerbtn" name="registerbtn" value="Register">
+<button type="submit" id="cookiesBtn" name="save_with_cookies">Save Data as Draft</button>
 
 </form>
+
 <br>
 <a href="login.php" >Login</a>
+</div>
 <p>Last modified: <?php echo getCookieValue('last_modified'); ?></p>
 
 </body>

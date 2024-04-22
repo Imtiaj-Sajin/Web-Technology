@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </td>
                 <td align="center">
                     <h2>User Profile</h2>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" novalidate>
                         <p>User ID: <?php echo $userData['user_id']; ?></p>
 
                         <label for="new_username">Username:</label>

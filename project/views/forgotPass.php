@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <br>
     <div class="login-container">
         <h2>Forgotten Pass</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return validateForm()" method="post" novalidate>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username">
             
@@ -72,5 +72,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
         <?php if (isset($error_message)) echo "<p style='color: red;' class='error-message'>$error_message</p>"; ?>
     </div>
+    <script> 
+        function validateForm() {
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("email").value;
+
+            if (username === "") {
+                alert("user Name must be filled out");
+                return false;
+            }
+
+            if (email === "") {
+                alert("Email must be filled out");
+                return false;
+            }
+
+        return true;
+        }</script>
+
 </body>
 </html>

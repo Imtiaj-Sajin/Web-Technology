@@ -100,7 +100,7 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
 }
 ?> 
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return validateForm()" method="post" novalidate>
 
 <?php if (!empty($registrationError)) { ?>
     <p style="color: red;"><?php echo $registrationError; ?></p>
@@ -181,5 +181,63 @@ $conPass = validateConfirmPassword(sanitize ($_POST['pass']), sanitize ($_POST['
 </div>
 <p>Last modified: <?php echo getCookieValue('last_modified'); ?></p>
 
+
+
+<script>
+    function validateForm() {
+        let email = document.getElementById("email").value;
+        let bio = document.getElementById("bio").value;
+        let website = document.getElementById("website").value;
+        let uname = document.getElementById("uname").value;
+        let pass = document.getElementById("pass").value;
+        let conpass = document.getElementById("conpass").value;
+
+        if (email === "") {
+            alert("Please enter your email");
+            return false;
+        }else if (!validateEmail(email)) {
+            alert("Please enter a valid email address");
+            return false;
+        }
+
+        if (bio === "") {
+            alert("Please enter your bio");
+            return false;
+        }
+
+        if (website === "") {
+            alert("Please enter your website");
+            return false;
+        }
+
+        if (uname === "") {
+            alert("Please enter your username");
+            return false;
+        }
+
+        if (pass === "") {
+            alert("Please enter your password");
+            return false;
+        }
+
+        if (conpass === "") {
+            alert("Please confirm your password");
+            return false;
+        }
+
+        if (pass !== conpass) {
+            alert("Passwords do not match");
+            return false;
+        }
+
+        function validateEmail(email) {
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+        return true;
+    }
+</script>
 </body>
+
 </html>

@@ -1,8 +1,8 @@
 <?php
 function footer_show() {
-    echo '<footer style="background-color: #3c424b; margin-left: 60px; height: 100px; color: #fff; text-align: center; padding-top: 20px;">';
+    echo '<footer style="background-color: #3c424b; margin-left: 50px; height: 300px; color: #fff; text-align: center; padding-top: 40px;">';
     echo 'Courseway!<br>';
-    echo 'A e-learning Platform';
+    echo 'An e-learning Platform';
     echo '</footer>';
 }
 
@@ -27,8 +27,10 @@ function header_show(){
 function side_bar_show(){
     echo '<div id="mySidebar" class="sidebar">
         <div class="sidebar-content">
-            <a href="#" title="Courses"><i class="fas fa-book"></i><span>Courses</span></a>
+            <a href="courses.php" title="Courses"><i class="fas fa-book"></i><span>Courses</span></a>
             <a href="#" title="Communication"><i class="fas fa-comment-alt"></i><span>Communication</span></a>
+            <a href="#" title="Assignments"><i class="fas fa-tasks"></i><span>Assignments</span></a>
+            <a href="#" title="Withdrawal"><i class="fa-solid fa-money-bill-transfer"></i><span>Withdrawal</span></a>
             <a href="profile.php" title="Profile"><i class="fas fa-user"></i><span>Profile</span></a>
             <a href="changePass.php" title="Change Password"><i class="fas fa-lock"></i><span>Change Password</span></a>
             <a href="../controllers/logout.php" title="Logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>

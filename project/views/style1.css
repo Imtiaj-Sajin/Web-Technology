@@ -1,0 +1,142 @@
+.dashboard-container{
+    /* background-color: rgb(243, 185, 255);  */
+    /* width: 100%; */
+    margin-left: 50px; 
+    margin-right: 0px;
+    padding: 20px;
+} 
+
+.dashboard-container .contentDiv{
+    /* background-color: rgb(186, 13, 13);  */
+    /* display: block; */
+    padding-left: 20px;
+} 
+
+/* ------course----------- */
+#course_create_btn {
+    position: absolute;
+    right: 20px; 
+    width: 300px; 
+    padding: 12px;
+    background-color: #a435f0;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.course-cards {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* background-color: red; */
+}
+
+.course-card {
+    display: flex;
+    width: 100%; 
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.course-thumbnail {
+    width: 200px;
+    height: 100%; 
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    overflow: hidden;
+}
+
+.course-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-details {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.course-details h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.course-status {
+    font-style: italic;
+    color: #777;
+}
+
+.course-price {
+    margin-right: 30px;
+    width: 33.33%;
+    padding: 20px;
+    font-size: 30px;
+    color: #4CAF50;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+}
+
+
+/* ------------------create course--------------- */
+.create_course{
+    margin: 10px;
+    margin-left: 60px;
+    display: block;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3)
+} 
+
+.create_course h2 {
+    margin-bottom: 20px; 
+    font-size: 24px; 
+}
+
+.create_course label {
+    font-weight: bold; 
+}
+
+.create_course input[type="text"],
+.create_course input[type="number"],
+.create_course textarea,
+.create_course select {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+.create_course textarea {
+    height: 120px; 
+}
+
+.create_course input[type="file"] {
+    margin-top: 10px; 
+}
+
+.create_course input[type="submit"] {
+    background-color: #a435f0;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.create_course input[type="submit"]:hover {
+    background-color: #5b00d1; 
+}

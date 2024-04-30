@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $userData = getValByUserName($username);
         $_SESSION['$userData'] = $userData;
+
         $_SESSION['username'] = $userData['user_name'];
         $_SESSION['userid'] = $userData['user_id'];
         $_SESSION['userpass'] = $userData['user_pass'];
@@ -56,11 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <div class="login-container">
         <h2>Login</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return validateForm()" method="post" novalidate>
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required><br>
+            <input type="text" id="username" name="username" placeholder="Enter your username" ><br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required><br>
+            <input type="password" id="password" name="password" placeholder="Enter your password" ><br>
             <input type="submit" value="Login">
             <div class="forgot-signup-links">
                 <a href="forgotPass.php">Forgot Password?</a>
@@ -70,5 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
         <?php if (isset($error_message)) echo "<p class='error-message'>$error_message</p>"; ?>
     </div>
+
+
+
+    <script src="validation.js"></script>
+
 </body>
 </html>

@@ -251,4 +251,48 @@ function getValByEmail($email) {
         return null;
     }
 }
+
+function getCoursesByUserId($user_id) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("SELECT * FROM courses WHERE instructor_id = ?");
+        if (!$stmt) {
+            throw new Exception($conn->error); 
+        }
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $courses = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $courses[] = $row;
+            }
+        }
+        return $courses;
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
+        return array();
+    }
+}
+
+function createCourse($title, $description, $category, $sub_category, $price, $thumbnail, $user_id) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("INSERT INTO courses (course_title, description, category, sub_category, price, thumbnail, course_status, instructor_id) VALUES (?, ?, ?, ?, ?, ?, 'published', ?)");
+        if (!$stmt) {
+            throw new Exception($conn->error);
+        }
+        $stmt->bind_param("ssssdss", $title, $description, $category, $sub_category, $price, $thumbnail, $user_id);
+        $success = $stmt->execute();
+        $stmt->close();
+        
+        return $success;
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>";
+        return false;
+    }
+}
+
+
+
 ?>

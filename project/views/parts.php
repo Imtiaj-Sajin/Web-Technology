@@ -1,11 +1,17 @@
 <?php
+// function footer_show() {
+//     echo '<footer style="background-color: #3c424b; margin-left: 50px; height: 300px; color: #fff; text-align: center; padding-top: 40px;">';
+//     echo 'Courseway!<br>';
+//     echo 'An e-learning Platform';
+//     echo '</footer>';
+// }
+
 function footer_show() {
-    echo '<footer style="background-color: #3c424b; margin-left: 50px; height: 300px; color: #fff; text-align: center; padding-top: 40px;">';
+    echo '<footer style="background-color: #3c424b; height: 250px; margin:0px; color: #fff; text-align: center; padding-top: 40px;">';
     echo 'Courseway!<br>';
     echo 'An e-learning Platform';
     echo '</footer>';
 }
-
 
 
 
@@ -28,7 +34,7 @@ function side_bar_show(){
     echo '<div id="mySidebar" class="sidebar">
         <div class="sidebar-content">
             <a href="courses.php" title="Courses"><i class="fas fa-book"></i><span>Courses</span></a>
-            <a href="#" title="Communication"><i class="fas fa-comment-alt"></i><span>Communication</span></a>
+            <a href="communication.php" title="Communication"><i class="fas fa-comment-alt"></i><span>Communication</span></a>
             <a href="#" title="Assignments"><i class="fas fa-tasks"></i><span>Assignments</span></a>
             <a href="#" title="Withdrawal"><i class="fa-solid fa-money-bill-transfer"></i><span>Withdrawal</span></a>
             <a href="profile.php" title="Profile"><i class="fas fa-user"></i><span>Profile</span></a>

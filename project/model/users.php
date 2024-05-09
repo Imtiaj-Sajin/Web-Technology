@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 function credentials($username, $password) {
     global $conn;
     try {
-        $stmt = $conn->prepare("SELECT user_id FROM users WHERE user_name = ? AND user_pass = ?");
+        $stmt = $conn->prepare("SELECT instructor_id FROM instructors WHERE instructor_name = ? AND instructor_pass = ?");
         if (!$stmt) {
             throw new Exception($conn->error);
         }
@@ -29,14 +29,14 @@ function credentials($username, $password) {
     }
 }
 
-function insertRecord($username, $user_pass, $email, $website, $bio) {
+function insertRecord($username, $instructor_pass, $email, $website, $bio) {
     global $conn;
     try {
-        $stmt = $conn->prepare("INSERT INTO users (user_name, user_pass, email, website, bio) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO instructors (instructor_name, instructor_pass, email, website, bio) VALUES (?, ?, ?, ?, ?)");
         if (!$stmt) {
             throw new Exception($conn->error);
         }
-        $stmt->bind_param("sssss", $username, $user_pass, $email, $website, $bio);
+        $stmt->bind_param("sssss", $username, $instructor_pass, $email, $website, $bio);
         $stmt->execute();
         echo "<p style='color: green;'>New record created successfully</p><br>"; 
         $stmt->close();
@@ -46,14 +46,14 @@ function insertRecord($username, $user_pass, $email, $website, $bio) {
 }
 
 
-function updateName($user_id, $username) {
+function updateName($instructor_id, $username) {
     global $conn;
     try {
-        $stmt = $conn->prepare("UPDATE users SET user_name = ? WHERE user_id = ?");
+        $stmt = $conn->prepare("UPDATE instructors SET instructor_name = ? WHERE instructor_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
-        $stmt->bind_param("si", $username, $user_id);
+        $stmt->bind_param("si", $username, $instructor_id);
         $stmt->execute();
         echo "<p style='color: green;'>User Name updated successfully</p><br>";  
         $stmt->close();
@@ -62,14 +62,14 @@ function updateName($user_id, $username) {
     }
 }
 
-function updatePass($user_id, $new_pass) {
+function updatePass($instructor_id, $new_pass) {
     global $conn;
     try {
-        $stmt = $conn->prepare("UPDATE users SET user_pass = ? WHERE user_id = ?");
+        $stmt = $conn->prepare("UPDATE instructors SET instructor_pass = ? WHERE instructor_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
-        $stmt->bind_param("si", $new_pass, $user_id);
+        $stmt->bind_param("si", $new_pass, $instructor_id);
         $stmt->execute();
         echo "<p style='color: green;'>Password updated successfully</p><br>"; 
         $stmt->close();
@@ -78,14 +78,14 @@ function updatePass($user_id, $new_pass) {
     }
 }
 
-function updateEmail($user_id, $new_email) {
+function updateEmail($instructor_id, $new_email) {
     global $conn;
     try {
-        $stmt = $conn->prepare("UPDATE users SET email = ? WHERE user_id = ?");
+        $stmt = $conn->prepare("UPDATE instructors SET email = ? WHERE instructor_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
-        $stmt->bind_param("si", $new_email, $user_id);
+        $stmt->bind_param("si", $new_email, $instructor_id);
         $stmt->execute();
         echo "<p style='color: green;'>Email updated successfully</p><br>"; 
         $stmt->close();
@@ -94,14 +94,14 @@ function updateEmail($user_id, $new_email) {
     }
 }
 
-function updateBio($user_id, $new_bio) {
+function updateBio($instructor_id, $new_bio) {
     global $conn;
     try {
-        $stmt = $conn->prepare("UPDATE users SET bio = ? WHERE user_id = ?");
+        $stmt = $conn->prepare("UPDATE instructors SET bio = ? WHERE instructor_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
-        $stmt->bind_param("si", $new_bio, $user_id);
+        $stmt->bind_param("si", $new_bio, $instructor_id);
         $stmt->execute();
         echo "<p style='color: green;'>Bio updated successfully</p><br>"; 
         $stmt->close();
@@ -110,14 +110,14 @@ function updateBio($user_id, $new_bio) {
     }
 }
 
-function updateWebsite($user_id, $new_website) {
+function updateWebsite($instructor_id, $new_website) {
     global $conn;
     try {
-        $stmt = $conn->prepare("UPDATE users SET website = ? WHERE user_id = ?");
+        $stmt = $conn->prepare("UPDATE instructors SET website = ? WHERE instructor_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
-        $stmt->bind_param("si", $new_website, $user_id);
+        $stmt->bind_param("si", $new_website, $instructor_id);
         $stmt->execute();
         echo "<p style='color: green;'>Website updated successfully</p><br>"; 
         $stmt->close();
@@ -129,7 +129,7 @@ function updateWebsite($user_id, $new_website) {
 function deleteRecord($userId) {
     global $conn;
     try {
-        $stmt = $conn->prepare("DELETE FROM users WHERE user_id = ?");
+        $stmt = $conn->prepare("DELETE FROM instructors WHERE instructor_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
@@ -145,7 +145,7 @@ function deleteRecord($userId) {
 function getAll() {
     global $conn;
     try {
-        $stmt = $conn->prepare("SELECT user_id, user_name, user_pass FROM users");
+        $stmt = $conn->prepare("SELECT instructor_id, instructor_name, instructor_pass FROM instructors");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
@@ -165,23 +165,23 @@ function getAll() {
     }
 }
 
-function getValById($user_id) {
+function getValById($instructor_id) {
     global $conn;
     try {
-        $stmt = $conn->prepare("SELECT user_id, user_name, user_pass, email, bio, website FROM users WHERE user_id = ?");
+        $stmt = $conn->prepare("SELECT instructor_id, instructor_name, instructor_pass, email, bio, website FROM instructors WHERE instructor_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
-        $stmt->bind_param("i", $user_id);
+        $stmt->bind_param("i", $instructor_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             return array(
-                "user_id" => $row['user_id'],
-                "user_name" => $row['user_name'],
-                "user_pass" => $row['user_pass'],
+                "instructor_id" => $row['instructor_id'],
+                "instructor_name" => $row['instructor_name'],
+                "instructor_pass" => $row['instructor_pass'],
                 "email" => $row['email'],
                 "bio" => $row['bio'],
                 "website" => $row['website']
@@ -194,23 +194,23 @@ function getValById($user_id) {
     }
 }
 
-function getValByUserName($user_name) {
+function getValByUserName($instructor_name) {
     global $conn;
     try {
-        $stmt = $conn->prepare("SELECT user_id, user_name, user_pass, email, bio, website FROM users WHERE user_name = ?");
+        $stmt = $conn->prepare("SELECT instructor_id, instructor_name, instructor_pass, email, bio, website FROM instructors WHERE instructor_name = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
-        $stmt->bind_param("s", $user_name);
+        $stmt->bind_param("s", $instructor_name);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             return array(
-                "user_id" => $row['user_id'],
-                "user_name" => $row['user_name'],
-                "user_pass" => $row['user_pass'],
+                "instructor_id" => $row['instructor_id'],
+                "instructor_name" => $row['instructor_name'],
+                "instructor_pass" => $row['instructor_pass'],
                 "email" => $row['email'],
                 "bio" => $row['bio'],
                 "website" => $row['website']
@@ -226,7 +226,7 @@ function getValByUserName($user_name) {
 function getValByEmail($email) {
     global $conn;
     try {
-        $stmt = $conn->prepare("SELECT user_id, user_name, user_pass, email, bio, website  FROM users WHERE email = ?");
+        $stmt = $conn->prepare("SELECT instructor_id, instructor_name, instructor_pass, email, bio, website  FROM instructors WHERE email = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
@@ -236,9 +236,9 @@ function getValByEmail($email) {
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             return array(
-                "user_id" => $row['user_id'],
-                "user_name" => $row['user_name'],
-                "user_pass" => $row['user_pass'],
+                "instructor_id" => $row['instructor_id'],
+                "instructor_name" => $row['instructor_name'],
+                "instructor_pass" => $row['instructor_pass'],
                 "email" => $row['email'],
                 "bio" => $row['bio'],
                 "website" => $row['website']
@@ -252,14 +252,14 @@ function getValByEmail($email) {
     }
 }
 
-function getCoursesByUserId($user_id) {
+function getCoursesByUserId($instructor_id) {
     global $conn;
     try {
         $stmt = $conn->prepare("SELECT * FROM courses WHERE instructor_id = ?");
         if (!$stmt) {
             throw new Exception($conn->error); 
         }
-        $stmt->bind_param("i", $user_id);
+        $stmt->bind_param("i", $instructor_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $courses = array();
@@ -275,14 +275,14 @@ function getCoursesByUserId($user_id) {
     }
 }
 
-function createCourse($title, $description, $category, $sub_category, $price, $thumbnail, $user_id) {
+function createCourse($title, $description, $category, $sub_category, $price, $thumbnail, $instructor_id) {
     global $conn;
     try {
         $stmt = $conn->prepare("INSERT INTO courses (course_title, description, category, sub_category, price, thumbnail, course_status, instructor_id) VALUES (?, ?, ?, ?, ?, ?, 'published', ?)");
         if (!$stmt) {
             throw new Exception($conn->error);
         }
-        $stmt->bind_param("ssssdss", $title, $description, $category, $sub_category, $price, $thumbnail, $user_id);
+        $stmt->bind_param("ssssdss", $title, $description, $category, $sub_category, $price, $thumbnail, $instructor_id);
         $success = $stmt->execute();
         $stmt->close();
         

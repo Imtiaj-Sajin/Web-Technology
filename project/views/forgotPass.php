@@ -12,10 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $temp_data=getValByEmail($email);
     $temp_email=$temp_data['email'];
-    $temp_uname=$temp_data['user_name'];
+    $temp_uname=$temp_data['instructor_name'];
 
     if ($email == $temp_email && $uname== $temp_uname) {
-        $temp_pass='your pass is '.$temp_data['user_pass'];
+        $temp_pass='your pass is '.$temp_data['instructor_pass'];
     } else {
         $error_message = "Does not match.";
     }

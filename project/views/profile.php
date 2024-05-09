@@ -58,10 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <td align="center">
                     <h2>User Profile</h2>
                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" novalidate>
-                        <p>User ID: <?php echo $userData['user_id']; ?></p>
+                        <p>User ID: <?php echo $userData['instructor_id']; ?></p>
 
                         <label for="new_username">Username:</label>
-                        <input type="text" id="new_username" name="new_username" value="<?php echo $userData['user_name']; ?>">
+                        <input type="text" id="new_username" name="new_username" value="<?php echo $userData['instructor_name']; ?>">
                         <button type="submit" name="update_username">Update</button><br>
 
                         <label for="new_email">Email:</label>

@@ -3,6 +3,7 @@ session_start();
 
 require "../model/users.php";
 require "../controllers/validation.php";
+require "parts.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = sanitize($_POST['username']);
@@ -14,12 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userData = getValByUserName($username);
         $_SESSION['$userData'] = $userData;
 
-        $_SESSION['username'] = $userData['user_name'];
-        $_SESSION['userid'] = $userData['user_id'];
-        $_SESSION['userpass'] = $userData['user_pass'];
+        $_SESSION['username'] = $userData['instructor_name'];
+        $_SESSION['userid'] = $userData['instructor_id'];
+        $_SESSION['userpass'] = $userData['instructor_pass'];
         $_SESSION['bio'] = $userData['bio'];
         $_SESSION['email'] = $userData['email'];
-        $_SESSION['email'] = $userData['website'];
+        $_SESSION['website'] = $userData['website'];
 
         header("Location: dashboard.php");
         exit();
@@ -75,6 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     <script src="validation.js"></script>
-
+<?php footer_show();?>
 </body>
 </html>

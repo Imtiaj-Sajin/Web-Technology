@@ -1,14 +1,14 @@
 <?php
 session_start();
 require "parts.php";
-require "../model/users.php"; // Include the users model file
+require "../model/users.php"; 
 
 if (!isset($_SESSION['hasLoggedIn'])) {
     header("Location: login.php");
     exit();
 }
 
-$user_id = $_SESSION['userid'];
+$instructor_id = $_SESSION['userid'];
 
 $successMessage = "";
 
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $thumbnail_content = file_get_contents($thumbnail_tmp_name);
 
-        $success = createCourse($title, $description, $category, $sub_category, $price, $thumbnail_content, $user_id);
+        $success = createCourse($title, $description, $category, $sub_category, $price, $thumbnail_content, $instructor_id);
 
         if ($success) {
             $successMessage = "Course created successfully!";

@@ -26,18 +26,18 @@ $allUsers = getAll();
         <tbody>
             <?php foreach ($allUsers as $user): ?>
                 <tr>
-                    <td><?php echo $user['user_id']; ?></td>
-                    <td><?php echo $user['user_name']; ?></td>
-                    <td><?php echo $user['user_pass']; ?></td>
+                    <td><?php echo $user['instructor_id']; ?></td>
+                    <td><?php echo $user['instructor_name']; ?></td>
+                    <td><?php echo $user['instructor_pass']; ?></td>
                     <td>
                         <form method="post" action="../controllers/delete_user.php">
-                            <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
+                            <input type="hidden" name="instructor_id" value="<?php echo $user['instructor_id']; ?>">
                             <button type="submit">Delete</button>
                         </form>
                     </td>
                     <td>
                         <form method="post" action="../controllers/update_user.php">
-                            <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
+                            <input type="hidden" name="instructor_id" value="<?php echo $user['instructor_id']; ?>">
                             <button type="submit">Update</button>
                         </form>
                     </td>

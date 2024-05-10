@@ -293,6 +293,36 @@ function createCourse($title, $description, $category, $sub_category, $price, $t
     }
 }
 
+function getAllUsers() {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("SELECT user_id, user_name, user_photo FROM users");
+        if (!$stmt) {
+            throw new Exception($conn->error);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $instructors = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $imageData = base64_encode($row['user_photo']); 
+                $imageSrc = 'data:image/jpeg;base64,' . $imageData;
+                $instructor = array(
+                    'instructor_id' => $row['user_id'],
+                    'instructor_name' => $row['user_name'],
+                    'instructor_photo' => $imageSrc 
+                );
+                $instructors[] = $instructor;
+            }
+        }
+        return $instructors;
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>";
+        return array();
+    }
+}
+
+
 
 
 ?>

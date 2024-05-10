@@ -84,7 +84,6 @@ if (isset($_GET['searchCourses'])) {
     <br>
     <div class="contentDiv">
         
-    asdfasdf
     </div>
 </div>
 

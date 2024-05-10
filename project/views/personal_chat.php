@@ -9,23 +9,64 @@ if(!isset($_SESSION['hasLoggedIn'])){
 }
 ?>
 
-<div class="message-container">
-    <h2>Personal Chat</h2>
-    <div class="message-list">
-        <div class="message">
-            <div class="message-sender">Alice</div>
-            <div class="message-body">Hi Bob, how are you?</div>
-            <div class="message-time">10:00 AM</div>
-        </div>
-        <div class="message">
-            <div class="message-sender">Bob</div>
-            <div class="message-body">Hey Alice, I'm good. How about you?</div>
-            <div class="message-time">10:05 AM</div>
-        </div>
-        <!-- Add more messages here -->
+<div class="right-sidebar">
+    <!-- Search box -->
+    <div class="search-box">
+        <input type="text" placeholder="Search">
+        <button class="search-button"><i class="fas fa-search"></i></button>
     </div>
-    <div class="message-input">
-        <input type="text" placeholder="Type your message...">
-        <button>Send</button>
+    
+    <!-- List of instructors -->
+    <div class="instructors-list">
+        <?php
+        $instructors = getAllUsers();
+        foreach ($instructors as $instructor) {
+            echo "<button class='instructor-button' data-instructor-id='" . $instructor['instructor_id'] . "' onclick='myFunction(" . json_encode($instructor) . ")'>";
+            echo "<div class='profile-photo'>";
+            echo "<img src='" . $instructor['instructor_photo'] . "' alt='Profile Photo'>";
+            echo "</div>";
+            echo "<div class='instructor-name'>" . $instructor['instructor_name'] . "</div>";
+            echo "</button>";
+        }
+        ?>
     </div>
 </div>
+
+<div class="message-box">
+    <div class="msg-info">
+    </div>
+    <div class="msg-content">
+
+    </div>
+</div>
+
+<script>
+    function myFunction(instructor) {
+        var msgInfo = document.querySelector('.msg-info');
+        msgInfo.innerHTML = ''; 
+        
+        var button = document.createElement('button');
+        button.classList.add('instructor-button');
+        
+        var profilePhoto = document.createElement('div');
+        profilePhoto.classList.add('profile-photo');
+        var img = document.createElement('img');
+        img.src = instructor.instructor_photo;
+        img.alt = 'Profile Photo';
+        profilePhoto.appendChild(img);
+        
+        var instructorName = document.createElement('div');
+        instructorName.classList.add('instructor-name');
+        instructorName.textContent = instructor.instructor_name;
+        
+        var hiddenId = document.createElement('input');
+        hiddenId.type = 'hidden';
+        hiddenId.value = instructor.instructor_id;
+        
+        button.appendChild(profilePhoto);
+        button.appendChild(instructorName);
+        button.appendChild(hiddenId);
+        
+        msgInfo.appendChild(button);
+    }
+</script>

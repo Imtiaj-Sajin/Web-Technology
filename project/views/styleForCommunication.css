@@ -10,9 +10,9 @@ body {
 
 
 .dashboard-container {
-    background-color: rgb(255, 84, 22); 
     margin-left: 250px; 
-    padding-left: 20px;
+    padding-left: 0px;
+    margin-top: 0px;
     /* padding: 0px; */
 }
 
@@ -21,52 +21,110 @@ body {
 /* --------------- message---------------*/
 
 
-.message-container {
-    background-color: #f7f9fa;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.message-list {
-    max-height: 300px; /* Adjust height as needed */
+.right-sidebar {
+    width: 180px; 
+    background-color: #f4f4f4;
+    border-right: 1px solid #ccc; 
+    position: fixed; 
+    top: 0; 
+    right: 0; 
+    height: 92%; 
+    padding: 10px;
+    margin-top: 82px;
     overflow-y: auto;
+    border-radius: 15px;
+    z-index: 1; 
 }
 
-.message {
+
+
+
+/* Search box styles */
+.search-box {
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
 }
 
-.message-sender {
+.search-box input {
+    
+    width: 120px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px; 
+}
+
+/* List of instructors styles */
+.instructors-list {
+    /* background-color: aquamarine; */
+    margin-top: 0px; 
+}
+
+.instructor-button {
+    display: flex;
+    width: 180px;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px; 
+    border-radius: 5px;
+    margin-bottom: 8px; 
+}
+
+
+.instructor-button:hover {
+    background-color: #ddd; 
+}
+
+.profile-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.instructor-name {
+    font-size: 16px; 
     font-weight: bold;
 }
 
-.message-time {
-    font-size: 12px;
-    color: #888;
-}
-
-.message-input {
-    margin-top: 20px;
-}
-
-.message-input input[type="text"] {
-    width: calc(100% - 70px);
-    padding: 8px;
+.message-box{
+    
+    height: 800px;   
+    background-color: #f7ecff;
+    margin-right: 210px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 30px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-color: black;
+    padding: 10px;
+
 }
 
-.message-input button {
-    width: 60px;
-    padding: 8px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.msg-info{
+    height:40px ;
 }
 
-.message-input button:hover {
-    background-color: #0056b3;
+.msg-content{
+    height: 90%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #1c1c1c;
+    border-radius: 15px;
 }

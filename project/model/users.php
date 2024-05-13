@@ -302,20 +302,20 @@ function getAllUsers() {
         }
         $stmt->execute();
         $result = $stmt->get_result();
-        $instructors = array();
+        $allUsers = array();
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $imageData = base64_encode($row['user_photo']); 
                 $imageSrc = 'data:image/jpeg;base64,' . $imageData;
-                $instructor = array(
-                    'instructor_id' => $row['user_id'],
-                    'instructor_name' => $row['user_name'],
-                    'instructor_photo' => $imageSrc 
+                $user = array(
+                    'user_id' => $row['user_id'],
+                    'user_name' => $row['user_name'],
+                    'user_photo' => $imageSrc 
                 );
-                $instructors[] = $instructor;
+                $allUsers[] = $user;
             }
         }
-        return $instructors;
+        return $allUsers;
     } catch (Exception $e) {
         echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>";
         return array();
@@ -324,5 +324,45 @@ function getAllUsers() {
 
 
 
+
+function InstructorId_ToUserId($instructorId) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("SELECT user_id FROM users WHERE instructor_id = ?");
+        if (!$stmt) {
+            throw new Exception($conn->error); 
+        }
+        $stmt->bind_param("i", $instructorId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            return $row['user_id'];
+        } else {
+            return null; 
+        }
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>"; 
+        return null;
+    }
+}
+
+
+function insertPersonalChat($fromId, $toId, $message) {
+    global $conn;
+    try {
+        $stmt = $conn->prepare("INSERT INTO personal_chats (sender_id, receiver_id, message) VALUES (?, ?, ?)");
+        if (!$stmt) {
+            throw new Exception($conn->error);
+        }
+        $stmt->bind_param("iis", $fromId, $toId, $message);
+        $stmt->execute();
+        echo "<p style='color: green;'>Personal chat message inserted successfully</p>";
+        $stmt->close();
+    } catch (Exception $e) {
+        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>";
+    }
+}
 
 ?>
